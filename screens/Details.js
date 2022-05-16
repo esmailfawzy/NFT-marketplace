@@ -56,6 +56,7 @@ const Details = ({route, navigation}) => {
   return (
     <SafeAreaView
       style={{
+        backgroundColor: COLORS.white,
         flex: 1,
       }}>
       <FocusedStatusBar

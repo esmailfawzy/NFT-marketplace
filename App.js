@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {Text, View} from 'react-native';
 import {Details, Home} from './screens';
+import {HomeNav, AuthNav} from './navigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,14 +17,16 @@ const theme = {
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
-      <Stack.Navigator
+      {/* <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
         }}>
         <Stack.Screen component={Home} name="Home" />
         <Stack.Screen component={Details} name="Details" />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+      <AuthNav />
+      {/* <HomeNav /> */}
     </NavigationContainer>
   );
 };

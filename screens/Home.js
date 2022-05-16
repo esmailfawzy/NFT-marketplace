@@ -40,7 +40,14 @@ const Home = () => {
               return <NFTCard data={item} />;
             }}
             showsVerticalScrollIndicator={false}
-            ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}
+            ListHeaderComponent={
+              <HomeHeader
+                handlePPpress={() => {
+                  console.log('profile pressed');
+                }}
+                onSearch={handleSearch}
+              />
+            }
           />
         </View>
 

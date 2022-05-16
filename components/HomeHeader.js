@@ -1,8 +1,15 @@
-import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  TextInput,
+  Image,
+} from 'react-native';
 import React from 'react';
 import {COLORS, FONTS, SIZES, assets} from '../constants';
 
-const HomeHeader = ({onSearch}) => {
+const HomeHeader = ({onSearch, handlePPpress}) => {
   return (
     <View
       style={{
@@ -20,15 +27,18 @@ const HomeHeader = ({onSearch}) => {
           resizeMode="contain"
           style={{width: 90, height: 25}}
         />
+
         <View style={{width: 45, height: 45}}>
-          <Image
-            source={assets.person01}
-            resizeMode="contain"
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-          />
+          <TouchableOpacity onPress={handlePPpress}>
+            <Image
+              source={assets.person01}
+              resizeMode="contain"
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          </TouchableOpacity>
           <Image
             source={assets.badge}
             resizeMode="contain"
@@ -78,7 +88,7 @@ const HomeHeader = ({onSearch}) => {
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: SIZES.font,
-            paddingVertical: SIZES.small - 2,
+            // paddingVertical: SIZES.small - 2,
           }}>
           <Image
             source={assets.search}
