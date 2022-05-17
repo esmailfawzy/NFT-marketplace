@@ -9,7 +9,8 @@ import {
   ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {assets, COLORS, FONTS, SIZES} from '../../constants';
 import {
@@ -19,9 +20,29 @@ import {
   FocusedStatusBar,
   HomeHeader,
 } from '../../components';
-
 const Login = () => {
   const [passIcon, setPassIcon] = useState('eye-off-outline');
+  const [logged, setLogged] = useState('');
+
+  const storeLogged = async value => {
+    // const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('loggedIn', value);
+  };
+
+  const getData = async () => {
+    let value = await AsyncStorage.getItem('loggedIn');
+    if (value != null) {
+      // value previously stored
+      // value = JSON.parse(value);
+      setLogged(value);
+      console.log(`value from assync ${value}`);
+    } else console.log("there's an error from login");
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.primary}}>
@@ -139,7 +160,17 @@ const Login = () => {
               </TouchableOpacity>
             </View>
 
-            <AuthBtn onPress={() => alert('Continue pressed')} />
+            <AuthBtn
+              onPress={() => {
+                // setLogged(true);
+                storeLogged('HomeNav');
+                console.log('con pressed');
+                navigation.navigate('HomeNav', {
+                  screen: 'Home',
+                });
+                // console.log(logged);
+              }}
+            />
 
             <Text
               style={{
